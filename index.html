@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neïla Bendjebbour-Taleb — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Variables ─────────────────────────────────────────── */
+    :root {
+      --bg:         #FAFAFA;
+      --text:       #333333;
+      --text-light: #777777;
+      --green:      #A8D5BA;
+      --green-soft: #d4ede0;
+      --blue:       #A7C7E7;
+      --blue-soft:  #d3e6f5;
+      --rose:       #F7AFC2;
+      --yellow:     #FCE38A;
+      --peach:      #FFB7A5;
+      --white:      #FFFFFF;
+      --shadow:     0 4px 24px rgba(0,0,0,0.07);
+      --shadow-md:  0 8px 32px rgba(0,0,0,0.11);
+      --radius:     18px;
+      --radius-sm:  10px;
+      --nav-h:      68px;
+      --font-head:  'Playfair Display', serif;
+      --font-body:  'Nunito', sans-serif;
+      --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ─── Reset / Base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ─── Scroll-reveal ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    /* ─── Navbar ────────────────────────────────────────────── */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(250,250,250,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(167,199,231,0.25);
+      z-index: 1000;
+      transition: box-shadow var(--transition);
+    }
+    #navbar.scrolled { box-shadow: var(--shadow); }
+
+    .nav-brand {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+    .nav-brand span {
+      color: var(--rose);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: var(--text-light);
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      border-color: var(--rose);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile nav */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: rgba(250,250,250,0.97);
+      backdrop-filter: blur(14px);
+      padding: 1.5rem 5%;
+      border-bottom: 1px solid rgba(167,199,231,0.25);
+      z-index: 999;
+    }
+    .nav-mobile.open { display: block; }
+    .nav-mobile ul { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .nav-mobile a {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-light);
+      transition: color var(--transition);
+    }
+    .nav-mobile a:hover { color: var(--text); }
+
+    /* ─── Sections commons ──────────────────────────────────── */
+    section {
+      padding: 100px 5% 80px;
+    }
+    section:first-of-type { padding-top: 0; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-title .accent { color: var(--rose); }
+
+    .section-divider {
+      width: 52px; height: 4px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      margin-bottom: 3rem;
+    }
+
+    .container { max-width: 1140px; margin: 0 auto; }
+
+    /* ─── Hero ──────────────────────────────────────────────── */
+    #accueil {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--nav-h);
+      background: linear-gradient(135deg, var(--bg) 55%, var(--blue-soft) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative blobs */
+    #accueil::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, var(--green-soft) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    #accueil::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 360px; height: 360px;
+      background: radial-gradient(circle, var(--rose) 0%, transparent 70%);
+      opacity: 0.25;
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1140px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      border: 1px solid var(--blue);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-light);
+      margin-bottom: 1.4rem;
+    }
+    .hero-tag .dot {
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+    .hero-title .name   { color: var(--text); }
+    .hero-title .italic { font-style: italic; color: var(--rose); }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      margin-bottom: 2.4rem;
+      max-width: 460px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 13px 28px;
+      cursor: pointer;
+      border: none;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--rose), var(--peach));
+      color: var(--white);
+    }
+    .btn-outline {
+      background: var(--white);
+      color: var(--text);
+      border: 2px solid var(--blue);
+    }
+
+    /* Hero visual */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-photo-wrap {
+      position: relative;
+      width: 340px; height: 400px;
+    }
+    .hero-photo-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, var(--blue-soft), var(--green-soft));
+      border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%;
+      animation: morphBlob 8s ease-in-out infinite alternate;
+    }
+    @keyframes morphBlob {
+      from { border-radius: 60% 40% 55% 45% / 50% 45% 55% 50%; }
+      to   { border-radius: 40% 60% 45% 55% / 55% 50% 45% 50%; }
+    }
+    .hero-photo-placeholder {
+      position: absolute;
+      inset: 24px;
+      background: linear-gradient(160deg, var(--blue) 0%, var(--green) 100%);
+      border-radius: 55% 45% 50% 50% / 48% 52% 48% 52%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: var(--white);
+      opacity: 0.5;
+    }
+    .hero-chip {
+      position: absolute;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-md);
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .hero-chip.chip-1 {
+      bottom: 40px; left: -20px;
+      border-left: 3px solid var(--green);
+    }
+    .hero-chip.chip-2 {
+      top: 30px; right: -20px;
+      border-left: 3px solid var(--rose);
+    }
+    .hero-chip .chip-icon { font-size: 1rem; }
+
+    /* ─── Profil ─────────────────────────────────────────────── */
+    #profil {
+      background: var(--white);
+    }
+
+    .profil-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .profil-text p {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      font-size: 0.97rem;
+    }
+
+    .profil-info-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .profil-info-card {
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      border-left: 3px solid var(--green);
+    }
+    .profil-info-card .card-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .profil-info-card .card-value {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px; top: 4px; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--blue), var(--green));
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.2rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.65rem; top: 6px;
+      width: 12px; height: 12px;
+      background: var(--white);
+      border: 3px solid var(--blue);
+      border-radius: 50%;
+    }
+    .timeline-date {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    .timeline-title {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .timeline-sub {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    /* ─── Compétences ────────────────────────────────────────── */
+    #competences {
+      background: linear-gradient(160deg, var(--bg) 60%, var(--green-soft) 100%);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem 1.6rem;
+      box-shadow: var(--shadow);
+      border-top: 4px solid transparent;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .skill-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .skill-card.green  { border-top-color: var(--green); }
+    .skill-card.blue   { border-top-color: var(--blue); }
+    .skill-card.rose   { border-top-color: var(--rose); }
+    .skill-card.yellow { border-top-color: var(--yellow); }
+    .skill-card.peach  { border-top-color: var(--peach); }
+    .skill-card.teal   { border-top-color: #8ECFC9; }
+
+    .skill-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .skill-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skill-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 50px;
+      background: var(--bg);
+      color: var(--text-light);
+      border: 1px solid rgba(0,0,0,0.07);
+    }
+
+    /* Soft skill bar */
+    .soft-skills { margin-top: 3.5rem; }
+    .soft-skills h3 {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1.6rem;
+    }
+    .soft-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+    .soft-item { }
+    .soft-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .soft-bar {
+      height: 8px;
+      background: var(--bg);
+      border-radius: 50px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .soft-fill {
+      height: 100%;
+      border-radius: 50px;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.9s cubic-bezier(0.4,0,0.2,1);
+    }
+    .soft-fill.animated { transform: scaleX(1); }
+
+    /* ─── Réalisations ───────────────────────────────────────── */
+    #realisations {
+      background: var(--white);
+    }
+
+    .realisations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6rem;
+    }
+    .real-card {
+      background: var(--bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .real-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+
+    .real-card-cover {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .real-card-cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: inherit;
+      opacity: 0.15;
+    }
+    .cover-1 { background: linear-gradient(135deg, var(--blue), var(--green)); }
+    .cover-2 { background: linear-gradient(135deg, var(--rose), var(--peach)); }
+    .cover-3 { background: linear-gradient(135deg, var(--yellow), var(--peach)); }
+    .cover-4 { background: linear-gradient(135deg, var(--green), #8ECFC9); }
+    .cover-5 { background: linear-gradient(135deg, var(--blue-soft), var(--blue)); }
+    .cover-6 { background: linear-gradient(135deg, var(--rose), var(--yellow)); }
+
+    .real-card-body {
+      padding: 1.4rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .real-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-bottom: 0.7rem;
+      background: var(--blue-soft);
+      color: #4a7fa5;
+    }
+    .real-badge.rose   { background: #fde4ed; color: #c25c80; }
+    .real-badge.green  { background: var(--green-soft); color: #4a8c65; }
+    .real-badge.yellow { background: #fef7d7; color: #9a7a10; }
+    .real-badge.peach  { background: #ffe8e2; color: #c45e46; }
+    .real-badge.teal   { background: #d5f0ec; color: #3a8a7e; }
+
+    .real-card-body h3 {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .real-card-body p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 1.2rem;
+      flex: 1;
+    }
+    .real-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .real-tools {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .real-tool {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 9px;
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 50px;
+      color: var(--text-light);
+    }
+    .real-link {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color var(--transition);
+    }
+    .real-link:hover { color: var(--rose); }
+
+    /* ─── Media placeholders ────────────────────────────────── */
+    .gallery-ph {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      border: 1.5px dashed rgba(0,0,0,0.1);
+      border-radius: var(--radius-sm);
+      padding: 8px;
+      margin: 0.8rem 0 1rem;
+      background: rgba(0,0,0,0.02);
+    }
+    .ph-box {
+      aspect-ratio: 1;
+      border-radius: 6px;
+    }
+    .video-ph {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1.5px dashed rgba(0,0,0,0.1);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin: 0.8rem 0 1rem;
+      background: rgba(0,0,0,0.02);
+      color: var(--text-light);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .ph-play {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--rose), var(--peach));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    /* Testimonial card special */
+    .temoignage-card {
+      background: linear-gradient(150deg, var(--green-soft) 0%, var(--blue-soft) 100%);
+    }
+    .temoignage-card .real-card-body {
+      background: transparent;
+    }
+    .temoignage-card blockquote {
+      font-family: var(--font-head);
+      font-style: italic;
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+    .temoignage-by {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+    }
+    .temoignage-cover {
+      background: linear-gradient(135deg, #8ECFC9, var(--blue)) !important;
+      font-family: var(--font-head);
+      font-size: 6rem !important;
+      color: rgba(255,255,255,0.5);
+      line-height: 1 !important;
+      padding-top: 1.5rem;
+    }
+
+    /* ─── Projet Pro ─────────────────────────────────────────── */
+    #projet-pro {
+      background: linear-gradient(160deg, var(--bg) 50%, var(--blue-soft) 100%);
+    }
+
+    .projet-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .objectif-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .objectif-card {
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem 1.4rem;
+      box-shadow: var(--shadow);
+    }
+    .objectif-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .objectif-icon.g  { background: var(--green-soft); }
+    .objectif-icon.b  { background: var(--blue-soft); }
+    .objectif-icon.r  { background: #fde4ed; }
+    .objectif-icon.y  { background: #fef7d7; }
+    .objectif-card h4 {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .objectif-card p {
+      font-size: 0.83rem;
+      color: var(--text-light);
+    }
+
+    .projet-right {}
+    .projet-highlight {
+      background: linear-gradient(135deg, var(--green-soft), var(--blue-soft));
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .projet-highlight::before {
+      content: '"';
+      position: absolute;
+      top: -10px; left: 12px;
+      font-size: 8rem;
+      font-family: var(--font-head);
+      color: var(--white);
+      opacity: 0.6;
+      line-height: 1;
+    }
+    .projet-highlight p {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text);
+      position: relative;
+      z-index: 1;
+    }
+
+    .valeurs-wrap {
+      margin-top: 1.6rem;
+    }
+    .valeurs-wrap h4 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .valeurs-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .valeur-pill {
+      padding: 7px 16px;
+      border-radius: 50px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.08);
+      color: var(--text);
+    }
+
+    /* ─── Contact ────────────────────────────────────────────── */
+    #contact {
+      background: var(--white);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info p {
+      color: var(--text-light);
+      font-size: 0.97rem;
+      margin-bottom: 2rem;
+    }
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .contact-item-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-item-icon.g { background: var(--green-soft); }
+    .contact-item-icon.b { background: var(--blue-soft); }
+    .contact-item-icon.r { background: #fde4ed; }
+    .contact-item-icon.y { background: #fef7d7; }
+    .contact-item-text .label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .contact-item-text .value {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* Form */
+    .contact-form {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 2.4rem 2rem;
+      box-shadow: var(--shadow);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group textarea {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      padding: 12px 16px;
+      border: 1.5px solid rgba(0,0,0,0.1);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(167,199,231,0.25);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-submit { margin-top: 1.4rem; }
+    .btn-send {
+      width: 100%;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--rose), var(--peach));
+      color: var(--white);
+      font-size: 0.95rem;
+      padding: 15px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.6);
+      padding: 2rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+    }
+    footer .foot-brand {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      color: var(--white);
+      font-weight: 700;
+    }
+    footer .foot-links {
+      display: flex;
+      gap: 1.4rem;
+    }
+    footer .foot-links a {
+      color: rgba(255,255,255,0.5);
+      transition: color var(--transition);
+    }
+    footer .foot-links a:hover { color: var(--rose); }
+
+    /* ─── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .realisations-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 70px 6% 60px; }
+
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
+      }
+      .hero-subtitle { margin: 0 auto 2.4rem; }
+      .hero-ctas { justify-content: center; }
+      .hero-visual { display: none; }
+
+      .profil-grid      { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid      { grid-template-columns: 1fr; }
+      .realisations-grid { grid-template-columns: 1fr; }
+      .projet-layout    { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-layout   { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row         { grid-template-columns: 1fr; }
+      .soft-grid        { grid-template-columns: 1fr; }
+      .profil-info-cards { grid-template-columns: 1fr; }
+
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════ NAVBAR ══════════════════ -->
+  <nav id="navbar">
+    <div class="nav-brand">Neïla <span>B-T</span></div>
+    <ul class="nav-links">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#realisations">Réalisations</a></li>
+      <li><a href="#projet-pro">Projet Pro</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile nav -->
+  <div class="nav-mobile" id="navMobile">
+    <ul>
+      <li><a href="#accueil"    class="nav-m-link">Accueil</a></li>
+      <li><a href="#profil"     class="nav-m-link">Profil</a></li>
+      <li><a href="#competences" class="nav-m-link">Compétences</a></li>
+      <li><a href="#realisations" class="nav-m-link">Réalisations</a></li>
+      <li><a href="#projet-pro" class="nav-m-link">Projet Pro</a></li>
+      <li><a href="#contact"    class="nav-m-link">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section id="accueil">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-tag reveal">
+          <span class="dot"></span>
+          Disponible en alternance · Paris-Saclay
+        </div>
+        <h1 class="hero-title reveal reveal-delay-1">
+          <span class="name">Bonjour, je suis<br /></span>
+          <span class="italic">Neïla Bendjebbour-Taleb</span>
+        </h1>
+        <p class="hero-subtitle reveal reveal-delay-2">
+          Étudiante en BUT Techniques de Commercialisation à l'IUT de Sceaux
+          — chargée de <strong>stratégie digitale junior</strong> en alternance chez Fix&amp;Go Mobility.<br />
+          Curieuse, créative et engagée, je construis des communications qui ont du sens.
+        </p>
+        <div class="hero-ctas reveal reveal-delay-3">
+          <a href="#realisations" class="btn btn-primary">Voir mes réalisations ↓</a>
+          <a href="#contact" class="btn btn-outline">Me contacter</a>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal reveal-delay-2">
+        <div class="hero-photo-wrap">
+          <div class="hero-photo-bg"></div>
+          <div class="hero-photo-placeholder" style="font-size:2rem;font-weight:700;font-family:var(--font-head);letter-spacing:3px;opacity:0.75">NBT</div>
+          <div class="hero-chip chip-1">
+            <span class="chip-icon">🎓</span>
+            BUT Tech. Commercialisation
+          </div>
+          <div class="hero-chip chip-2">
+            <span class="chip-icon">💡</span>
+            Communication Digitale
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ PROFIL ══════════════════ -->
+  <section id="profil">
+    <div class="container">
+      <div class="profil-grid">
+        <div>
+          <span class="section-label reveal">À propos</span>
+          <h2 class="section-title reveal reveal-delay-1">Mon <span class="accent">profil</span></h2>
+          <div class="section-divider reveal reveal-delay-1"></div>
+
+          <div class="profil-text reveal reveal-delay-2">
+            <p>
+              Étudiante en 3ème année de BUT Techniques de Commercialisation à l'IUT de Sceaux
+              (Université Paris-Saclay), je me spécialise dans la communication digitale
+              et la stratégie de marque à travers mon alternance chez Fix&amp;Go Mobility.
+            </p>
+            <p>
+              En tant que chargée de stratégie digitale junior, j'interviens en totale autonomie
+              sur la communication de l'entreprise : stratégie éditoriale, création de contenus,
+              refonte de l'identité visuelle et animation des réseaux sociaux.
+            </p>
+            <p>
+              Curieuse, créative et engagée, je cherche à allier rigueur stratégique et
+              sensibilité artistique pour construire des communications qui ont du sens —
+              et contribuer à la naissance d'identités de marque fortes.
+            </p>
+          </div>
+
+          <div class="profil-info-cards reveal reveal-delay-3">
+            <div class="profil-info-card">
+              <div class="card-label">Formation</div>
+              <div class="card-value">BUT Tech. Commercialisation</div>
+            </div>
+            <div class="profil-info-card">
+              <div class="card-label">Établissement</div>
+              <div class="card-value">IUT de Sceaux · Paris-Saclay</div>
+            </div>
+            <div class="profil-info-card">
+              <div class="card-label">Alternance</div>
+              <div class="card-value">Fix&amp;Go Mobility</div>
+            </div>
+            <div class="profil-info-card">
+              <div class="card-label">Localisation</div>
+              <div class="card-value">Île-de-France</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="section-label reveal">Parcours</span>
+          <h2 class="section-title reveal reveal-delay-1">Mon <span class="accent">histoire</span></h2>
+          <div class="section-divider reveal reveal-delay-1"></div>
+
+          <div class="timeline reveal reveal-delay-2">
+            <div class="timeline-item">
+              <div class="timeline-date">2023 – 2026</div>
+              <div class="timeline-title">BUT Techniques de Commercialisation</div>
+              <div class="timeline-sub">IUT de Sceaux · Université Paris-Saclay</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2023 – 2026</div>
+              <div class="timeline-title">Alternance — Chargée de stratégie digitale junior</div>
+              <div class="timeline-sub">Fix&amp;Go Mobility</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">En cours</div>
+              <div class="timeline-title">Chargée de communication bénévole</div>
+              <div class="timeline-sub">Association Al Mouna — Actions solidaires &amp; humanitaires</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2023</div>
+              <div class="timeline-title">Baccalauréat</div>
+              <div class="timeline-sub">Obtenu avec succès</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ COMPÉTENCES ══════════════════ -->
+  <section id="competences">
+    <div class="container">
+      <span class="section-label reveal">Savoir-faire</span>
+      <h2 class="section-title reveal reveal-delay-1">Mes <span class="accent">compétences</span></h2>
+      <div class="section-divider reveal reveal-delay-1"></div>
+
+      <div class="skills-grid">
+        <div class="skill-card blue reveal reveal-delay-1">
+          <div class="skill-icon">📢</div>
+          <h3>Stratégie de communication</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Positionnement</span>
+            <span class="skill-tag">Messages clés</span>
+            <span class="skill-tag">Plan de com. 360°</span>
+            <span class="skill-tag">SWOT · PESTEL</span>
+          </div>
+        </div>
+        <div class="skill-card green reveal reveal-delay-2">
+          <div class="skill-icon">🎨</div>
+          <h3>Création de contenu &amp; direction artistique</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Canva</span>
+            <span class="skill-tag">Direction artistique</span>
+            <span class="skill-tag">Storyboard</span>
+            <span class="skill-tag">Copywriting</span>
+          </div>
+        </div>
+        <div class="skill-card rose reveal reveal-delay-3">
+          <div class="skill-icon">🔍</div>
+          <h3>Analyse de marché</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Étude concurrentielle</span>
+            <span class="skill-tag">Veille stratégique</span>
+            <span class="skill-tag">Ciblage</span>
+            <span class="skill-tag">Proposition de valeur</span>
+          </div>
+        </div>
+        <div class="skill-card yellow reveal reveal-delay-1">
+          <div class="skill-icon">📋</div>
+          <h3>Gestion de projet</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Coordination d'équipe</span>
+            <span class="skill-tag">Planning</span>
+            <span class="skill-tag">Leadership</span>
+            <span class="skill-tag">Autonomie</span>
+          </div>
+        </div>
+        <div class="skill-card peach reveal reveal-delay-2">
+          <div class="skill-icon">📱</div>
+          <h3>Stratégie digitale &amp; réseaux sociaux</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Instagram</span>
+            <span class="skill-tag">LinkedIn</span>
+            <span class="skill-tag">TikTok</span>
+            <span class="skill-tag">Ligne éditoriale</span>
+          </div>
+        </div>
+        <div class="skill-card teal reveal reveal-delay-3">
+          <div class="skill-icon">✨</div>
+          <h3>Branding &amp; identité visuelle</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Charte graphique</span>
+            <span class="skill-tag">Flyers</span>
+            <span class="skill-tag">Plaquette commerciale</span>
+            <span class="skill-tag">Cohérence visuelle</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="soft-skills">
+        <h3 class="reveal">Savoir-être</h3>
+        <div class="soft-grid">
+          <div class="soft-item reveal reveal-delay-1">
+            <div class="soft-label"><span>Créativité</span><span></span></div>
+            <div class="soft-bar"><div class="soft-fill" data-width="90"></div></div>
+          </div>
+          <div class="soft-item reveal reveal-delay-2">
+            <div class="soft-label"><span>Organisation</span><span></span></div>
+            <div class="soft-bar"><div class="soft-fill" data-width="85"></div></div>
+          </div>
+          <div class="soft-item reveal reveal-delay-3">
+            <div class="soft-label"><span>Communication</span><span></span></div>
+            <div class="soft-bar"><div class="soft-fill" data-width="88"></div></div>
+          </div>
+          <div class="soft-item reveal reveal-delay-4">
+            <div class="soft-label"><span>Adaptabilité</span><span></span></div>
+            <div class="soft-bar"><div class="soft-fill" data-width="82"></div></div>
+          </div>
+          <div class="soft-item reveal reveal-delay-5">
+            <div class="soft-label"><span>Travail en équipe</span><span></span></div>
+            <div class="soft-bar"><div class="soft-fill" data-width="92"></div></div>
+          </div>
+          <div class="soft-item reveal reveal-delay-6">
+            <div class="soft-label"><span>Curiosité</span><span></span></div>
+            <div class="soft-bar"><div class="soft-fill" data-width="95"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ RÉALISATIONS ══════════════════ -->
+  <section id="realisations">
+    <div class="container">
+      <span class="section-label reveal">Portfolio</span>
+      <h2 class="section-title reveal reveal-delay-1">Mes <span class="accent">réalisations</span></h2>
+      <div class="section-divider reveal reveal-delay-1"></div>
+
+      <div class="realisations-grid">
+
+        <!-- Projet 1 : VOLTIZ -->
+        <div class="real-card reveal reveal-delay-1">
+          <div class="real-card-cover cover-1">⚡</div>
+          <div class="real-card-body">
+            <span class="real-badge green">Académique</span>
+            <h3>VOLTIZ — Création d'entreprise</h3>
+            <p>Solution de borne de recharge sécurisée pour vélos et trottinettes électriques en entreprise. Rôle de leader produit : business model, coordination d'équipe, business plan complet.</p>
+            <div class="gallery-ph">
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--blue-soft),var(--green-soft))"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--green-soft),var(--blue))"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--blue),var(--green))"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--green),var(--blue-soft))"></div>
+            </div>
+            <div class="real-card-footer">
+              <div class="real-tools">
+                <span class="real-tool">Analyse de marché</span>
+                <span class="real-tool">Gestion de projet</span>
+                <span class="real-tool">Marketing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projet 2 : Petits Filous -->
+        <div class="real-card reveal reveal-delay-2">
+          <div class="real-card-cover cover-2">🎬</div>
+          <div class="real-card-body">
+            <span class="real-badge">Académique</span>
+            <h3>Campagne Petits Filous — Com. 360°</h3>
+            <p>Campagne de communication 360° pour moderniser l'image de Petits Filous. Cheffe de projet : concept créatif, storyboard et production d'un spot vidéo publicitaire. Analyse SWOT/PESTEL.</p>
+            <div class="video-ph">
+              <div class="ph-play">▶</div>
+              <span>Aperçu du spot publicitaire</span>
+            </div>
+            <div class="real-card-footer">
+              <div class="real-tools">
+                <span class="real-tool">Stratégie com.</span>
+                <span class="real-tool">Direction artistique</span>
+                <span class="real-tool">Vidéo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projet 3 : Fix&Go Stratégie -->
+        <div class="real-card reveal reveal-delay-3">
+          <div class="real-card-cover cover-3">📱</div>
+          <div class="real-card-body">
+            <span class="real-badge rose">Professionnel</span>
+            <h3>Fix&amp;Go Mobility — Stratégie digitale</h3>
+            <p>Mission en autonomie totale : analyse de la communication existante, définition des cibles et messages clés, mise en place d'une ligne éditoriale et planification des contenus réseaux sociaux.</p>
+            <div class="gallery-ph">
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--rose),var(--peach))"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--peach),#f7d5dc)"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,#f7d5dc,var(--rose))"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--rose),var(--peach))"></div>
+            </div>
+            <div class="real-card-footer">
+              <div class="real-tools">
+                <span class="real-tool">Stratégie</span>
+                <span class="real-tool">Réseaux sociaux</span>
+                <span class="real-tool">Ligne éditoriale</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projet 4 : Fix&Go Identité visuelle -->
+        <div class="real-card reveal reveal-delay-1">
+          <div class="real-card-cover cover-4">🎨</div>
+          <div class="real-card-body">
+            <span class="real-badge peach">Professionnel</span>
+            <h3>Fix&amp;Go Mobility — Identité visuelle</h3>
+            <p>Création de zéro d'une identité visuelle cohérente : flyers, supports tarifaires, plaquette commerciale. Adaptation aux différentes implantations locales de l'entreprise.</p>
+            <div class="gallery-ph">
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--peach),var(--yellow))"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--yellow),var(--peach))"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--peach),#ffcfbf)"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,#ffcfbf,var(--yellow))"></div>
+            </div>
+            <div class="real-card-footer">
+              <div class="real-tools">
+                <span class="real-tool">Branding</span>
+                <span class="real-tool">Canva</span>
+                <span class="real-tool">Direction artistique</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projet 5 : Association Al Mouna -->
+        <div class="real-card reveal reveal-delay-2">
+          <div class="real-card-cover cover-5">🤝</div>
+          <div class="real-card-body">
+            <span class="real-badge yellow">Personnel</span>
+            <h3>Association Al Mouna — Communication</h3>
+            <p>Chargée de communication bénévole : création de contenus réseaux sociaux, communication événementielle. Production de contenu terrain lors d'une maraude solidaire (photos, vidéos, stories).</p>
+            <div class="video-ph">
+              <div class="ph-play">▶</div>
+              <span>Contenu terrain · Maraude solidaire</span>
+            </div>
+            <div class="real-card-footer">
+              <div class="real-tools">
+                <span class="real-tool">Réseaux sociaux</span>
+                <span class="real-tool">Création contenu</span>
+                <span class="real-tool">Terrain</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projet 6 : Témoignage maître d'apprentissage -->
+        <div class="real-card temoignage-card reveal reveal-delay-3">
+          <div class="real-card-cover temoignage-cover">❝</div>
+          <div class="real-card-body">
+            <span class="real-badge teal">Témoignage</span>
+            <h3>Retour maître d'apprentissage</h3>
+            <blockquote>
+              « Neïla a joué un rôle central dans la communication de l'entreprise.
+              Son autonomie, sa capacité à prendre des initiatives et son implication
+              ont permis de structurer durablement notre présence digitale. »
+            </blockquote>
+            <p class="temoignage-by">— Maître d'apprentissage, Fix&amp;Go Mobility</p>
+            <div class="gallery-ph">
+              <div class="ph-box" style="background:linear-gradient(135deg,#d5f0ec,#8ECFC9)"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--blue-soft),var(--blue))"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,var(--green-soft),var(--green))"></div>
+              <div class="ph-box" style="background:linear-gradient(135deg,#8ECFC9,#d5f0ec)"></div>
+            </div>
+            <div class="real-card-footer">
+              <div class="real-tools">
+                <span class="real-tool">Autonomie</span>
+                <span class="real-tool">Impact pro.</span>
+                <span class="real-tool">Com. digitale</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ PROJET PRO ══════════════════ -->
+  <section id="projet-pro">
+    <div class="container">
+      <span class="section-label reveal">Ambitions</span>
+      <h2 class="section-title reveal reveal-delay-1">Mon projet <span class="accent">professionnel</span></h2>
+      <div class="section-divider reveal reveal-delay-1"></div>
+
+      <div class="projet-layout">
+        <div>
+          <div class="objectif-cards">
+            <div class="objectif-card reveal reveal-delay-1">
+              <div class="objectif-icon g">🎓</div>
+              <div>
+                <h4>Court terme — Finir en beauté</h4>
+                <p>Valider le BUT TC avec succès et finaliser mon alternance chez Fix&amp;Go Mobility en développant mes compétences en stratégie digitale et en gestion de projet.</p>
+              </div>
+            </div>
+            <div class="objectif-card reveal reveal-delay-2">
+              <div class="objectif-icon b">🚀</div>
+              <div>
+                <h4>Moyen terme — Master INSEEC</h4>
+                <p>Intégrer un Master en communication, publicité et stratégie de contenu à l'INSEEC pour approfondir ma formation et accéder à des postes à plus forte responsabilité.</p>
+              </div>
+            </div>
+            <div class="objectif-card reveal reveal-delay-3">
+              <div class="objectif-icon r">✨</div>
+              <div>
+                <h4>Métiers visés</h4>
+                <p>Chargée de communication · Cheffe de projet communication · Responsable stratégie de contenu — dans des environnements créatifs et innovants.</p>
+              </div>
+            </div>
+            <div class="objectif-card reveal reveal-delay-4">
+              <div class="objectif-icon y">📚</div>
+              <div>
+                <h4>Compétences à développer</h4>
+                <p>Création visuelle et direction artistique, conception de campagnes intégrées et analyse de performance digitale.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="projet-right reveal reveal-delay-2">
+          <div class="projet-highlight">
+            <p>
+              « Travailler sur des projets créatifs et utiles, contribuer à la construction
+              d'identités de marque fortes et à des stratégies de communication innovantes. »
+            </p>
+          </div>
+
+          <div class="valeurs-wrap">
+            <h4>Mes valeurs</h4>
+            <div class="valeurs-list">
+              <span class="valeur-pill">Créativité</span>
+              <span class="valeur-pill">Authenticité</span>
+              <span class="valeur-pill">Curiosité</span>
+              <span class="valeur-pill">Rigueur</span>
+              <span class="valeur-pill">Engagement</span>
+              <span class="valeur-pill">Initiative</span>
+            </div>
+          </div>
+
+          <div class="valeurs-wrap" style="margin-top:2rem">
+            <h4>Secteurs visés</h4>
+            <div class="valeurs-list">
+              <span class="valeur-pill">Communication digitale</span>
+              <span class="valeur-pill">Création de contenu</span>
+              <span class="valeur-pill">Stratégie de marque</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ CONTACT ══════════════════ -->
+  <section id="contact">
+    <div class="container">
+      <span class="section-label reveal">Échangeons</span>
+      <h2 class="section-title reveal reveal-delay-1">Me <span class="accent">contacter</span></h2>
+      <div class="section-divider reveal reveal-delay-1"></div>
+
+      <div class="contact-layout">
+        <div class="contact-info reveal reveal-delay-1">
+          <p>
+            Étudiante en alternance, je suis ouverte à toute opportunité en communication
+            digitale. N'hésitez pas à m'écrire — je serai ravie d'échanger !
+          </p>
+          <div class="contact-items">
+            <div class="contact-item">
+              <div class="contact-item-icon r">✉️</div>
+              <div class="contact-item-text">
+                <div class="label">Email</div>
+                <div class="value"><a href="mailto:Talebneila025@gmail.com" style="color:inherit">Talebneila025@gmail.com</a></div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon b">💼</div>
+              <div class="contact-item-text">
+                <div class="label">LinkedIn</div>
+                <div class="value"><a href="https://fr.linkedin.com/in/ne%C3%AFla-bendjebbour-taleb" target="_blank" rel="noopener" style="color:inherit">Neïla Bendjebbour-Taleb</a></div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon g">📍</div>
+              <div class="contact-item-text">
+                <div class="label">Localisation</div>
+                <div class="value">Île-de-France</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon y">🎓</div>
+              <div class="contact-item-text">
+                <div class="label">Alternance</div>
+                <div class="value">Fix&amp;Go Mobility · IUT de Sceaux</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form reveal reveal-delay-2">
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Prénom & Nom</label>
+                <input type="text" id="name" placeholder="Jean Dupont" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="jean@exemple.fr" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group full">
+                <label for="subject">Objet</label>
+                <input type="text" id="subject" placeholder="Opportunité d'alternance" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group full">
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="Lorem ipsum dolor sit amet…" required></textarea>
+              </div>
+            </div>
+            <div class="form-submit">
+              <button type="submit" class="btn btn-send">Envoyer le message ✉️</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer>
+    <div class="foot-brand">Neïla Bendjebbour-Taleb</div>
+    <span>© 2026 — Tous droits réservés</span>
+    <div class="foot-links">
+      <a href="#accueil">Accueil</a>
+      <a href="#profil">Profil</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <!-- ══════════════════ JS ══════════════════ -->
+  <script>
+    /* ── Navbar scroll shadow ── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    /* ── Active nav link on scroll ── */
+    const sections  = document.querySelectorAll('section[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+
+    function setActive() {
+      const scrollY = window.scrollY + 90;
+      sections.forEach(sec => {
+        const top    = sec.offsetTop;
+        const bottom = top + sec.offsetHeight;
+        const id     = sec.getAttribute('id');
+        navAnchors.forEach(a => {
+          if (a.getAttribute('href') === '#' + id) {
+            a.classList.toggle('active', scrollY >= top && scrollY < bottom);
+          }
+        });
+      });
+    }
+    window.addEventListener('scroll', setActive, { passive: true });
+
+    /* ── Hamburger ── */
+    const hamburger = document.getElementById('hamburger');
+    const navMobile = document.getElementById('navMobile');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navMobile.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.nav-m-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navMobile.classList.remove('open');
+      });
+    });
+
+    /* ── Scroll reveal ── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ── Soft skill bar animation ── */
+    const bars = document.querySelectorAll('.soft-fill');
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fill  = entry.target;
+          const width = fill.dataset.width;
+          fill.style.width = width + '%';
+          fill.classList.add('animated');
+          barObserver.unobserve(fill);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    bars.forEach(bar => barObserver.observe(bar));
+
+    /* ── Contact form (placeholder) ── */
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.btn-send');
+      btn.textContent = '✓ Message envoyé !';
+      btn.style.background = 'linear-gradient(135deg, #A8D5BA, #A7C7E7)';
+      setTimeout(() => {
+        btn.textContent = 'Envoyer le message ✉️';
+        btn.style.background = '';
+        e.target.reset();
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
