@@ -1072,6 +1072,13 @@
       display: block;
       max-height: 340px;
     }
+    /* Screenshots portrait (téléphone) */
+    .portrait-gallery img {
+      aspect-ratio: 9/16;
+      object-fit: cover;
+      object-position: top;
+      max-height: 420px;
+    }
     /* YouTube embed — standard 16:9 */
     .modal-video {
       position: relative;
@@ -1946,8 +1953,10 @@
           </div>
         </div>
         <div class="modal-divider"></div>
-        <div class="modal-gallery g1">
-          <img src="https://raw.githubusercontent.com/nadimbendjebbour-lab/premier-projet/main/temoignage.jpg.JPEG" alt="Témoignage maître d'apprentissage" />
+        <div class="modal-gallery g3 portrait-gallery">
+          <img src="media/temoignage-1.PNG" alt="Message de remerciement — 18 août 2025" />
+          <img src="media/temoignage-2.PNG" alt="Retour sur le projet" />
+          <img src="media/temoignage-3.PNG" alt="Orientations stratégiques" />
         </div>
       </div>
     </div>
