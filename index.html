@@ -975,6 +975,193 @@
 
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
+    /* ─── Modals ─────────────────────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(40,40,40,0.55);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 3000;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal-container {
+      background: var(--white);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 740px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.2);
+      position: relative;
+      margin: auto;
+      animation: modalIn 0.32s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+    @keyframes modalIn {
+      from { opacity:0; transform: scale(0.93) translateY(24px); }
+      to   { opacity:1; transform: scale(1)    translateY(0); }
+    }
+    .modal-topbar {
+      display: flex;
+      justify-content: flex-end;
+      padding: 1rem 1rem 0;
+    }
+    .modal-close {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: var(--bg);
+      color: var(--text-light);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition), color var(--transition);
+    }
+    .modal-close:hover { background: var(--rose); color: var(--white); }
+
+    .modal-inner { padding: 0.5rem 2rem 2.4rem; }
+
+    .modal-header { margin-bottom: 1.6rem; }
+    .modal-header h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-top: 0.5rem;
+    }
+    .modal-section { margin-bottom: 1.2rem; }
+    .modal-section h4 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.45rem;
+    }
+    .modal-section p { font-size: 0.93rem; line-height: 1.72; color: var(--text); }
+    .modal-divider { height: 1px; background: rgba(0,0,0,0.06); margin: 1.3rem 0; }
+    .modal-comp-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .modal-comp-tag {
+      padding: 5px 13px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: var(--bg);
+      border: 1.5px solid rgba(0,0,0,0.07);
+      color: var(--text);
+    }
+    .modal-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 1.2rem;
+    }
+    .modal-gallery.g1 { grid-template-columns: 1fr; }
+    .modal-gallery.g3 { grid-template-columns: repeat(3, 1fr); }
+    .modal-gallery img {
+      width: 100%;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      aspect-ratio: 4/3;
+      background: var(--bg);
+      display: block;
+    }
+    /* YouTube embed — standard 16:9 */
+    .modal-video {
+      position: relative;
+      padding-bottom: 56.25%;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: #000;
+      margin-top: 1.2rem;
+    }
+    .modal-video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    /* YouTube Shorts — portrait 9:16, centered */
+    .modal-video-shorts {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.2rem;
+    }
+    .modal-video-shorts .shorts-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      padding-bottom: min(177.78%, 560px);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: #000;
+    }
+    .modal-video-shorts iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    /* Testimonial modal */
+    .modal-temoignage-block {
+      background: linear-gradient(135deg, var(--green-soft), var(--blue-soft));
+      border-radius: var(--radius-sm);
+      padding: 1.6rem 1.6rem 1.4rem;
+      position: relative;
+      overflow: hidden;
+      margin: 1.2rem 0;
+    }
+    .modal-temoignage-block::before {
+      content: '"';
+      position: absolute;
+      top: -18px; left: 10px;
+      font-size: 7rem;
+      font-family: var(--font-head);
+      color: rgba(255,255,255,0.55);
+      line-height: 1;
+    }
+    .modal-temoignage-block blockquote {
+      font-family: var(--font-head);
+      font-style: italic;
+      font-size: 1rem;
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+    }
+    .modal-temoignage-block .temo-by {
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-light);
+      position: relative;
+      z-index: 1;
+    }
+    /* Clickable cards */
+    .real-card.clickable { cursor: pointer; }
+    .real-card.clickable:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+    .real-card.clickable:hover .real-card-body h3 { color: var(--rose); transition: color var(--transition); }
+    .card-open-hint {
+      font-size: 0.73rem;
+      font-weight: 700;
+      color: var(--rose);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+      .modal-inner { padding: 0.5rem 1.2rem 2rem; }
+      .modal-gallery { grid-template-columns: 1fr; }
+      .modal-gallery.g3 { grid-template-columns: repeat(2,1fr); }
+    }
   </style>
 </head>
 
@@ -1055,19 +1242,19 @@
 
           <div class="profil-text reveal reveal-delay-2">
             <p>
-              Étudiante en 3ème année de BUT Techniques de Commercialisation à l'IUT de Sceaux
-              (Université Paris-Saclay), je me spécialise dans la communication digitale
-              et la stratégie de marque à travers mon alternance chez Fix&amp;Go Mobility.
+              Je suis étudiante en 3ème année de BUT Techniques de Commercialisation
+              à l'IUT de Sceaux, et en alternance chez Fix&amp;Go Mobility depuis 2024
+              comme chargée de stratégie digitale junior.
             </p>
             <p>
-              En tant que chargée de stratégie digitale junior, j'interviens en totale autonomie
-              sur la communication de l'entreprise : stratégie éditoriale, création de contenus,
-              refonte de l'identité visuelle et animation des réseaux sociaux.
+              Au quotidien, je gère la communication de l'entreprise : ligne éditoriale,
+              création de contenus, animation des réseaux sociaux, refonte de l'identité
+              visuelle — le tout en autonomie.
             </p>
             <p>
-              Curieuse, créative et engagée, je cherche à allier rigueur stratégique et
-              sensibilité artistique pour construire des communications qui ont du sens —
-              et contribuer à la naissance d'identités de marque fortes.
+              Ce qui me plaît dans ce que je fais, c'est de donner une vraie voix à
+              une marque. Que ce soit à travers un visuel, une campagne ou une story —
+              je veux que ça ait du sens et que ça ressemble à quelque chose.
             </p>
           </div>
 
@@ -1103,7 +1290,7 @@
               <div class="timeline-sub">IUT de Sceaux · Université Paris-Saclay</div>
             </div>
             <div class="timeline-item">
-              <div class="timeline-date">2023 – 2026</div>
+              <div class="timeline-date">2024 – 2026</div>
               <div class="timeline-title">Alternance — Chargée de stratégie digitale junior</div>
               <div class="timeline-sub">Fix&amp;Go Mobility</div>
             </div>
@@ -1114,8 +1301,8 @@
             </div>
             <div class="timeline-item">
               <div class="timeline-date">2023</div>
-              <div class="timeline-title">Baccalauréat</div>
-              <div class="timeline-sub">Obtenu avec succès</div>
+              <div class="timeline-title">Baccalauréat STMG</div>
+              <div class="timeline-sub">Lycée Saint-Jean de Montmartre, Paris</div>
             </div>
           </div>
         </div>
@@ -1235,140 +1422,113 @@
       <div class="realisations-grid">
 
         <!-- Projet 1 : VOLTIZ -->
-        <div class="real-card reveal reveal-delay-1">
+        <div class="real-card clickable reveal reveal-delay-1" onclick="openModal('modal-voltiz')">
           <div class="real-card-cover cover-1">⚡</div>
           <div class="real-card-body">
             <span class="real-badge green">Académique</span>
             <h3>VOLTIZ — Création d'entreprise</h3>
-            <p>Solution de borne de recharge sécurisée pour vélos et trottinettes électriques en entreprise. Rôle de leader produit : business model, coordination d'équipe, business plan complet.</p>
-            <div class="gallery-ph">
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--blue-soft),var(--green-soft))"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--green-soft),var(--blue))"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--blue),var(--green))"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--green),var(--blue-soft))"></div>
-            </div>
+            <p>Solution de borne de recharge pour vélos et trottinettes électriques. Leader produit : business model, coordination d'équipe, business plan complet.</p>
             <div class="real-card-footer">
               <div class="real-tools">
                 <span class="real-tool">Analyse de marché</span>
                 <span class="real-tool">Gestion de projet</span>
                 <span class="real-tool">Marketing</span>
               </div>
+              <span class="card-open-hint">Voir →</span>
             </div>
           </div>
         </div>
 
         <!-- Projet 2 : Petits Filous -->
-        <div class="real-card reveal reveal-delay-2">
+        <div class="real-card clickable reveal reveal-delay-2" onclick="openModal('modal-petitsfilous')">
           <div class="real-card-cover cover-2">🎬</div>
           <div class="real-card-body">
             <span class="real-badge">Académique</span>
             <h3>Campagne Petits Filous — Com. 360°</h3>
-            <p>Campagne de communication 360° pour moderniser l'image de Petits Filous. Cheffe de projet : concept créatif, storyboard et production d'un spot vidéo publicitaire. Analyse SWOT/PESTEL.</p>
-            <div class="video-ph">
-              <div class="ph-play">▶</div>
-              <span>Aperçu du spot publicitaire</span>
-            </div>
+            <p>Campagne 360° pour moderniser l'image de Petits Filous. Cheffe de projet : concept créatif, storyboard et spot vidéo publicitaire.</p>
             <div class="real-card-footer">
               <div class="real-tools">
                 <span class="real-tool">Stratégie com.</span>
                 <span class="real-tool">Direction artistique</span>
                 <span class="real-tool">Vidéo</span>
               </div>
+              <span class="card-open-hint">Voir →</span>
             </div>
           </div>
         </div>
 
         <!-- Projet 3 : Fix&Go Stratégie -->
-        <div class="real-card reveal reveal-delay-3">
+        <div class="real-card clickable reveal reveal-delay-3" onclick="openModal('modal-fixgo-strat')">
           <div class="real-card-cover cover-3">📱</div>
           <div class="real-card-body">
             <span class="real-badge rose">Professionnel</span>
             <h3>Fix&amp;Go Mobility — Stratégie digitale</h3>
-            <p>Mission en autonomie totale : analyse de la communication existante, définition des cibles et messages clés, mise en place d'une ligne éditoriale et planification des contenus réseaux sociaux.</p>
-            <div class="gallery-ph">
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--rose),var(--peach))"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--peach),#f7d5dc)"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,#f7d5dc,var(--rose))"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--rose),var(--peach))"></div>
-            </div>
+            <p>Mission en autonomie : analyse de l'existant, ligne éditoriale, définition des cibles et planification des contenus réseaux sociaux.</p>
             <div class="real-card-footer">
               <div class="real-tools">
                 <span class="real-tool">Stratégie</span>
                 <span class="real-tool">Réseaux sociaux</span>
                 <span class="real-tool">Ligne éditoriale</span>
               </div>
+              <span class="card-open-hint">Voir →</span>
             </div>
           </div>
         </div>
 
         <!-- Projet 4 : Fix&Go Identité visuelle -->
-        <div class="real-card reveal reveal-delay-1">
+        <div class="real-card clickable reveal reveal-delay-1" onclick="openModal('modal-fixgo-id')">
           <div class="real-card-cover cover-4">🎨</div>
           <div class="real-card-body">
             <span class="real-badge peach">Professionnel</span>
             <h3>Fix&amp;Go Mobility — Identité visuelle</h3>
-            <p>Création de zéro d'une identité visuelle cohérente : flyers, supports tarifaires, plaquette commerciale. Adaptation aux différentes implantations locales de l'entreprise.</p>
-            <div class="gallery-ph">
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--peach),var(--yellow))"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--yellow),var(--peach))"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--peach),#ffcfbf)"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,#ffcfbf,var(--yellow))"></div>
-            </div>
+            <p>Création de zéro d'une identité visuelle : flyers, plaquette commerciale, supports tarifaires. Cohérence graphique sur toutes les implantations.</p>
             <div class="real-card-footer">
               <div class="real-tools">
                 <span class="real-tool">Branding</span>
                 <span class="real-tool">Canva</span>
                 <span class="real-tool">Direction artistique</span>
               </div>
+              <span class="card-open-hint">Voir →</span>
             </div>
           </div>
         </div>
 
         <!-- Projet 5 : Association Al Mouna -->
-        <div class="real-card reveal reveal-delay-2">
+        <div class="real-card clickable reveal reveal-delay-2" onclick="openModal('modal-almouna')">
           <div class="real-card-cover cover-5">🤝</div>
           <div class="real-card-body">
             <span class="real-badge yellow">Personnel</span>
             <h3>Association Al Mouna — Communication</h3>
-            <p>Chargée de communication bénévole : création de contenus réseaux sociaux, communication événementielle. Production de contenu terrain lors d'une maraude solidaire (photos, vidéos, stories).</p>
-            <div class="video-ph">
-              <div class="ph-play">▶</div>
-              <span>Contenu terrain · Maraude solidaire</span>
-            </div>
+            <p>Chargée de communication bénévole : contenus RS, communication événementielle et production terrain lors d'une maraude solidaire.</p>
             <div class="real-card-footer">
               <div class="real-tools">
                 <span class="real-tool">Réseaux sociaux</span>
                 <span class="real-tool">Création contenu</span>
                 <span class="real-tool">Terrain</span>
               </div>
+              <span class="card-open-hint">Voir →</span>
             </div>
           </div>
         </div>
 
         <!-- Projet 6 : Témoignage maître d'apprentissage -->
-        <div class="real-card temoignage-card reveal reveal-delay-3">
+        <div class="real-card temoignage-card clickable reveal reveal-delay-3" onclick="openModal('modal-temoignage')">
           <div class="real-card-cover temoignage-cover">❝</div>
           <div class="real-card-body">
             <span class="real-badge teal">Témoignage</span>
             <h3>Retour maître d'apprentissage</h3>
             <blockquote>
-              « Neïla a joué un rôle central dans la communication de l'entreprise.
-              Son autonomie, sa capacité à prendre des initiatives et son implication
-              ont permis de structurer durablement notre présence digitale. »
+              « Son autonomie et sa capacité à prendre des initiatives ont permis
+              de structurer durablement notre présence digitale. »
             </blockquote>
             <p class="temoignage-by">— Maître d'apprentissage, Fix&amp;Go Mobility</p>
-            <div class="gallery-ph">
-              <div class="ph-box" style="background:linear-gradient(135deg,#d5f0ec,#8ECFC9)"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--blue-soft),var(--blue))"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,var(--green-soft),var(--green))"></div>
-              <div class="ph-box" style="background:linear-gradient(135deg,#8ECFC9,#d5f0ec)"></div>
-            </div>
             <div class="real-card-footer">
               <div class="real-tools">
                 <span class="real-tool">Autonomie</span>
                 <span class="real-tool">Impact pro.</span>
                 <span class="real-tool">Com. digitale</span>
               </div>
+              <span class="card-open-hint">Voir →</span>
             </div>
           </div>
         </div>
@@ -1529,6 +1689,270 @@
     </div>
   </section>
 
+  <!-- ══════════════════ MODALS ══════════════════ -->
+
+  <!-- MODAL 1 — VOLTIZ -->
+  <div class="modal-overlay" id="modal-voltiz">
+    <div class="modal-container">
+      <div class="modal-topbar">
+        <button class="modal-close" onclick="closeModal('modal-voltiz')">✕</button>
+      </div>
+      <div class="modal-inner">
+        <div class="modal-header">
+          <span class="real-badge green">Académique</span>
+          <h2>VOLTIZ — Création d'entreprise</h2>
+        </div>
+        <div class="modal-section">
+          <h4>Contexte</h4>
+          <p>Projet de création d'entreprise réalisé en BUT Techniques de Commercialisation. VOLTIZ est une solution de borne de recharge sécurisée pour vélos et trottinettes électriques, à destination des entreprises, dans un contexte de transition écologique.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Démarche</h4>
+          <p>Analyse de marché, définition du concept et de la proposition de valeur, positionnement. En tant que Leader produit/service, j'ai structuré le business model — sources de revenus, partenaires clés, plan de déploiement — et coordonné l'équipe tout au long du projet.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Résultat</h4>
+          <p>Business plan complet, structuré et cohérent, présentant une solution crédible et bien positionnée sur son marché.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Compétences développées</h4>
+          <div class="modal-comp-tags">
+            <span class="modal-comp-tag">Analyse de marché</span>
+            <span class="modal-comp-tag">Gestion de projet</span>
+            <span class="modal-comp-tag">Stratégie marketing</span>
+          </div>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-gallery">
+          <img src="media/media_neness/voltiz-cover.jpg.PNG"     alt="VOLTIZ — présentation" />
+          <img src="media/media_neness/voltiz-equipe.jpg.PNG"    alt="VOLTIZ — équipe" />
+          <img src="media/media_neness/voltiz-contexte.jpg.PNG"  alt="VOLTIZ — contexte marché" />
+          <img src="media/media_neness/voltiz-solution.jpg.PNG"  alt="VOLTIZ — solution" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2 — Petits Filous -->
+  <div class="modal-overlay" id="modal-petitsfilous">
+    <div class="modal-container">
+      <div class="modal-topbar">
+        <button class="modal-close" onclick="closeModal('modal-petitsfilous')">✕</button>
+      </div>
+      <div class="modal-inner">
+        <div class="modal-header">
+          <span class="real-badge">Académique</span>
+          <h2>Campagne Petits Filous — Communication 360°</h2>
+        </div>
+        <div class="modal-section">
+          <h4>Contexte</h4>
+          <p>Création d'une campagne de communication 360° pour moderniser l'image de Petits Filous tout en conservant son identité et ses valeurs de marque.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Démarche</h4>
+          <p>Analyse stratégique SWOT/PESTEL, construction de la stratégie de communication — cibles, objectifs, messages clés. En tant que cheffe de projet, j'ai piloté toutes les étapes : conception du concept créatif, réalisation du storyboard et production du spot vidéo publicitaire.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Résultat</h4>
+          <p>Campagne complète et cohérente, reposant sur un concept créatif fort, avec un spot vidéo finalisé et prêt à diffuser.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Compétences développées</h4>
+          <div class="modal-comp-tags">
+            <span class="modal-comp-tag">Stratégie de communication</span>
+            <span class="modal-comp-tag">Direction artistique</span>
+            <span class="modal-comp-tag">Gestion de projet</span>
+          </div>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-video-shorts">
+          <div class="shorts-wrap">
+            <iframe src="https://www.youtube.com/embed/1gSZGnsztRo" allowfullscreen title="Spot Petits Filous"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3 — Fix&Go Stratégie digitale -->
+  <div class="modal-overlay" id="modal-fixgo-strat">
+    <div class="modal-container">
+      <div class="modal-topbar">
+        <button class="modal-close" onclick="closeModal('modal-fixgo-strat')">✕</button>
+      </div>
+      <div class="modal-inner">
+        <div class="modal-header">
+          <span class="real-badge rose">Professionnel</span>
+          <h2>Fix&amp;Go Mobility — Stratégie de communication</h2>
+        </div>
+        <div class="modal-section">
+          <h4>Contexte</h4>
+          <p>En alternance chez Fix&amp;Go Mobility, entreprise spécialisée en mobilité douce. Mission prise en charge en autonomie totale sur l'ensemble de la communication digitale.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Démarche</h4>
+          <p>Analyse de la communication existante, identification des axes d'amélioration. Définition des cibles et messages, mise en place d'une ligne éditoriale cohérente et planification des contenus réseaux sociaux.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Résultat</h4>
+          <p>Communication plus structurée et lisible, présence digitale claire et régulière, meilleure cohérence entre les différents canaux.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Compétences développées</h4>
+          <div class="modal-comp-tags">
+            <span class="modal-comp-tag">Autonomie</span>
+            <span class="modal-comp-tag">Stratégie de communication</span>
+            <span class="modal-comp-tag">Analyse des cibles</span>
+          </div>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-gallery g3">
+          <img src="media/media_neness/fixgo-rs1.jpg.PNG"  alt="Fix&Go — réseaux sociaux 1" />
+          <img src="media/media_neness/fixgo-rs2.jpg.PNG"  alt="Fix&Go — réseaux sociaux 2" />
+          <img src="media/media_neness/fixgo-rs3.jpg.JPEG" alt="Fix&Go — réseaux sociaux 3" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 4 — Fix&Go Identité visuelle -->
+  <div class="modal-overlay" id="modal-fixgo-id">
+    <div class="modal-container">
+      <div class="modal-topbar">
+        <button class="modal-close" onclick="closeModal('modal-fixgo-id')">✕</button>
+      </div>
+      <div class="modal-inner">
+        <div class="modal-header">
+          <span class="real-badge peach">Professionnel</span>
+          <h2>Fix&amp;Go Mobility — Identité visuelle</h2>
+        </div>
+        <div class="modal-section">
+          <h4>Contexte</h4>
+          <p>À mon arrivée chez Fix&amp;Go Mobility, aucune identité visuelle structurée n'existait. C'était un enjeu fort pour la communication de l'entreprise, encore en phase de lancement.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Démarche</h4>
+          <p>Création de supports de communication — flyers, supports tarifaires, plaquette commerciale — avec un travail sur la lisibilité, l'impact et la cohérence graphique. Adaptation aux différentes implantations locales de l'entreprise.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Résultat</h4>
+          <p>Identité visuelle cohérente et professionnelle, renforçant l'image de marque et facilitant la communication sur le terrain.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Compétences développées</h4>
+          <div class="modal-comp-tags">
+            <span class="modal-comp-tag">Création visuelle</span>
+            <span class="modal-comp-tag">Branding</span>
+            <span class="modal-comp-tag">Adaptation</span>
+          </div>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-gallery">
+          <img src="media/media_neness/fixgo-brandbook.jpg.JPG" alt="Fix&Go — brandbook" />
+          <img src="media/media_neness/fixgo-charte.jpg.JPG"    alt="Fix&Go — charte graphique" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 5 — Association Al Mouna -->
+  <div class="modal-overlay" id="modal-almouna">
+    <div class="modal-container">
+      <div class="modal-topbar">
+        <button class="modal-close" onclick="closeModal('modal-almouna')">✕</button>
+      </div>
+      <div class="modal-inner">
+        <div class="modal-header">
+          <span class="real-badge yellow">Personnel</span>
+          <h2>Association Al Mouna — Communication</h2>
+        </div>
+        <div class="modal-section">
+          <h4>Contexte</h4>
+          <p>Engagement associatif bénévole — chargée de communication au sein de l'association Al Mouna, qui mène des actions solidaires et humanitaires.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Démarche</h4>
+          <p>Création de contenus pour les réseaux sociaux, communication autour des événements de l'association. Lors d'une maraude solidaire, production de contenu terrain en conditions réelles : photos, vidéos, stories Instagram.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Résultat</h4>
+          <p>Communication plus dynamique et engageante, meilleure valorisation des actions de l'association auprès de sa communauté.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Compétences développées</h4>
+          <div class="modal-comp-tags">
+            <span class="modal-comp-tag">Création de contenu</span>
+            <span class="modal-comp-tag">Réactivité</span>
+            <span class="modal-comp-tag">Engagement</span>
+          </div>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-video-shorts">
+          <div class="shorts-wrap">
+            <iframe src="https://www.youtube.com/embed/bJ69OV4qJp8" allowfullscreen title="Al Mouna — maraude solidaire"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 6 — Témoignage -->
+  <div class="modal-overlay" id="modal-temoignage">
+    <div class="modal-container">
+      <div class="modal-topbar">
+        <button class="modal-close" onclick="closeModal('modal-temoignage')">✕</button>
+      </div>
+      <div class="modal-inner">
+        <div class="modal-header">
+          <span class="real-badge teal">Témoignage</span>
+          <h2>Retour maître d'apprentissage — Fix&amp;Go Mobility</h2>
+        </div>
+        <div class="modal-section">
+          <h4>Contexte</h4>
+          <p>Retour formulé par le maître d'apprentissage de Neïla chez Fix&amp;Go Mobility, portant sur l'ensemble de sa mission en alternance.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-temoignage-block">
+          <blockquote>« Neïla a joué un rôle central dans la communication de l'entreprise. Son autonomie, sa capacité à prendre des initiatives et son implication ont permis de structurer durablement notre présence digitale. Elle a su s'approprier les enjeux de l'entreprise rapidement et y apporter une vraie valeur ajoutée. »</blockquote>
+          <p class="temo-by">— Maître d'apprentissage, Fix&amp;Go Mobility</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Résultat</h4>
+          <p>Reconnaissance de l'impact réel de Neïla au sein de l'entreprise : contribution concrète à la structuration de la communication et de la présence digitale.</p>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-section">
+          <h4>Compétences validées</h4>
+          <div class="modal-comp-tags">
+            <span class="modal-comp-tag">Autonomie</span>
+            <span class="modal-comp-tag">Impact professionnel</span>
+            <span class="modal-comp-tag">Communication digitale</span>
+          </div>
+        </div>
+        <div class="modal-divider"></div>
+        <div class="modal-gallery g1">
+          <img src="media/media_neness/temoignage.jpg.JPEG" alt="Témoignage maître d'apprentissage" />
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ══════════════════ FOOTER ══════════════════ -->
   <footer>
     <div class="foot-brand">Neïla Bendjebbour-Taleb</div>
@@ -1611,6 +2035,42 @@
     }, { threshold: 0.5 });
 
     bars.forEach(bar => barObserver.observe(bar));
+
+    /* ── Modals ── */
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (!modal) return;
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      // Stoppe les iframes YouTube
+      modal.querySelectorAll('iframe').forEach(f => { const s = f.src; f.src = ''; f.src = s; });
+    }
+    // Clic sur l'overlay → ferme
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', e => {
+        if (e.target === overlay) {
+          overlay.classList.remove('open');
+          document.body.style.overflow = '';
+          overlay.querySelectorAll('iframe').forEach(f => { const s = f.src; f.src = ''; f.src = s; });
+        }
+      });
+    });
+    // Touche Échap → ferme
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(m => {
+          m.classList.remove('open');
+          document.body.style.overflow = '';
+          m.querySelectorAll('iframe').forEach(f => { const s = f.src; f.src = ''; f.src = s; });
+        });
+      }
+    });
 
     /* ── Contact form (placeholder) ── */
     function handleSubmit(e) {
